@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { FiEye, FiEyeOff, FiMail, FiLock } from "react-icons/fi";
+import { FiEye, FiEyeOff, FiMail, FiLock, FiUser } from "react-icons/fi";
 import { FaGoogle, FaFacebook, FaGithub } from "react-icons/fa";
 import { GiAstronautHelmet, GiRobotGolem } from "react-icons/gi";
 import { IoMdPlanet } from "react-icons/io";
@@ -17,6 +17,7 @@ interface SignUpCardProps {
 
 export const SignUpCard = ({ setState }: SignUpCardProps) => {
     const { signIn } = useAuthActions();
+    const [name, setName] = useState(""); 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
 
         setPending(true);
         setError("");
-        signIn("password", {email, password, flow: "signUp"})
+        signIn("password", {name ,email, password, flow: "signUp"})
         .catch(()=> {
             setError("Something went wrong! Please try Again")
         })
@@ -121,6 +122,23 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
                         )}
                         <CardContent className="space-y-4 md:space-y-6">
                             <form onSubmit={handlePasswordSignUp} className="space-y-4 md:space-y-6">
+
+                                 {/* Name Input */}
+                                 <motion.div
+                                    className="relative"
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.2, duration: 0.5 }}
+                                >
+                                    <Input
+                                        disabled={pending}
+                                        placeholder="Full Name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full px-5 py-3 md:py-4 pl-12 md:pl-14 rounded-lg bg-white text-gray-800 placeholder-gray-400 border border-gray-300 shadow-md focus:ring-2 focus:ring-[#ff6384] text-base md:text-lg"
+                                    />
+                                    <FiUser className="absolute left-4 md:left-5 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+                                </motion.div>
                                 {/* Email Input */}
                                 <motion.div
                                     className="relative"
