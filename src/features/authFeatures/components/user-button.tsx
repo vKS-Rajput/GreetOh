@@ -12,7 +12,7 @@ export const UserButton = () => {
     const { signOut } = useAuthActions();
 
     if (isLoading) {
-        return <Loader className="size-5 animate-spin text-muted-foreground" />;
+        return <Loader className="size-5 animate-spin text-gray-400" />;
     }
 
     if (!data) {
@@ -20,57 +20,55 @@ export const UserButton = () => {
     }
 
     const { image, name, email } = data;
-
-    const avatarFallback = name ? name.charAt(0).toUpperCase() : "U"; // Fallback to "U" if name is undefined
+    const avatarFallback = name ? name.charAt(0).toUpperCase() : "U"; // Default to "U" if no name
 
     return (
         <DropdownMenu modal={false}>
             <DropdownMenuTrigger className="outline-none relative">
                 <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }} // Bouncy hover effect
-                    whileTap={{ scale: 0.9 }} // Tap effect
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }} // Spring animation
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    className="p-1 rounded-full border border-gray-300 bg-white shadow-sm hover:bg-gray-100 transition"
                 >
-                    <Avatar className="size-10 hover:opacity-75 transition">
+                    <Avatar className="size-6">
                         <AvatarImage src={image} alt={name || "User"} />
-                        <AvatarFallback className="bg-gradient-to-r from-[#eb738d] to-[#e788a2] text-[#f184ed] font-bold text-2xl shadow-lg">
-                            <motion.div
-                                initial={{ scale: 0 }} // Initial animation state
-                                animate={{ scale: 1 }} // Animate in
-                                transition={{ type: "spring", stiffness: 300, damping: 10 }} // Spring animation
-                                className="flex items-center justify-center w-full h-full"
-                            >
-                                {avatarFallback}
-                            </motion.div>
+                        <AvatarFallback className=" text-gray-700 font-bold text-lg">
+                            {avatarFallback}
                         </AvatarFallback>
                     </Avatar>
                 </motion.div>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent
                 align="center"
                 side="right"
-                className="w-60 bg-white shadow-lg rounded-lg p-2 border border-gray-200"
+                className="w-64 bg-white shadow-md rounded-lg border border-gray-200 p-3"
             >
                 <motion.div
-                    initial={{ opacity: 0, y: -10 }} // Initial animation state
-                    animate={{ opacity: 1, y: 0 }} // Animate in
-                    transition={{ duration: 0.3 }} // Smooth transition
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                 >
-                    <DropdownMenuItem className="flex items-center justify-between p-2 hover:bg-gray-100 rounded-md">
-                        <div className="flex flex-col space-y-1">
-                            <p className="font-medium">{name}</p>
-                            <p className="text-sm text-muted-foreground">{email}</p>
-                        </div>
-                        <motion.div
-                            whileHover={{ scale: 1.2 }} // Hover effect on the logout button
-                            whileTap={{ scale: 0.9 }} // Tap effect
-                            transition={{ type: "spring", stiffness: 300, damping: 10 }} // Spring animation
-                            className="flex items-center space-x-2 cursor-pointer"
-                            onClick={() => signOut()}
-                        >
-                            <LogOut className="size-6 text-red-500" /> {/* Larger logout icon */}
-                        </motion.div>
+                    {/* User Info */}
+                    <DropdownMenuItem className="flex flex-col items-start p-2">
+                        <p className="font-medium text-gray-900">{name}</p>
+                        <p className="text-sm text-gray-500">{email}</p>
                     </DropdownMenuItem>
+
+                    <div className="border-t my-2" />
+
+                    {/* Logout Button (Styled like other buttons) */}
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                        className="flex items-center justify-center p-2 text-red-500 cursor-pointer bg-gray-100 hover:bg-red-100 border border-gray-300 rounded-lg"
+                        onClick={() => signOut()}
+                    >
+                        <LogOut className="size-5 mr-2" />
+                        <span className="text-sm font-medium">Sign Out</span>
+                    </motion.div>
                 </motion.div>
             </DropdownMenuContent>
         </DropdownMenu>
