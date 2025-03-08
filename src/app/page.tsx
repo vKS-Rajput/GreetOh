@@ -2,7 +2,7 @@
 
 import { UserButton } from "@/features/authFeatures/components/user-button";
 import { useCreateWorkspaceModel } from "@/features/workspace/store/use-create-workspace-model";
-import { useGetWorkspaces } from "@/features/workspace/api/use-get-workspace";
+import { useGetWorkspaces } from "@/features/workspace/api/use-get-workspaces";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 
