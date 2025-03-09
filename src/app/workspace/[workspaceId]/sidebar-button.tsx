@@ -7,15 +7,17 @@ import { motion } from "framer-motion";
 interface SidebarButtonProps {
     icon: LucideIcon | IconType;
     label: string;
-    isActive?: boolean;
+    isActive: boolean;
+    onClick: () => void; // ✅ Handle active page switch
 }
 
-export const SidebarButton = ({ icon: Icon, label, isActive }: SidebarButtonProps) => {
+export const SidebarButton = ({ icon: Icon, label, isActive, onClick }: SidebarButtonProps) => {
     return (
         <motion.div
-            className="flex flex-col items-center justify-center gap-y-1 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="flex flex-col items-center cursor-pointer"
+            onClick={onClick} // ✅ Update state instead of using href
         >
             <Button
                 variant="transparent"
