@@ -4,8 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { FiEye, FiEyeOff, FiMail, FiLock } from "react-icons/fi";
 import { FaGoogle, FaFacebook, FaApple, FaGithub } from "react-icons/fa";
-import { GiAstronautHelmet, GiRobotGolem } from "react-icons/gi";
-import { IoMdPlanet } from "react-icons/io";
 import { motion } from "framer-motion";
 import { SignInFlow } from "../types";
 import { useAuthActions } from "@convex-dev/auth/react";
@@ -31,11 +29,11 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
         setError("");
         signIn("password", { email, password, flow: "signIn" })
             .catch(() => {
-                setError("Invalid email or password! Please try again")
+                setError("Invalid email or password! Please try again");
             })
             .finally(() => {
-                setPending(false)
-            })
+                setPending(false);
+            });
     };
 
     const handleProviderSignIn = (provider: "github" | "google" | "facebook") => {
@@ -43,72 +41,106 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
     };
 
     return (
-        <div className="h-screen flex items-center justify-center bg-gradient-to-br from-[#ff9a9e] to-[#fad0c4] px-4">
+        <div className="h-screen flex items-center justify-center p-4 sm:p-0">
             <motion.div
-                className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-lg"
+                className="flex flex-col md:flex-row w-full max-w-4xl bg-gray-800 rounded-3xl overflow-hidden shadow-lg"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                {/* Left Side - Animated Cartoon Character */}
-                <div className="w-full md:w-1/2 bg-[#ffeded] flex flex-col justify-center items-center p-6 md:p-8 space-y-4 md:space-y-6 relative overflow-hidden">
-                    {/* Floating Astronaut */}
+                {/* Left Side - Vibble Logo Animation */}
+                <div className="w-full md:w-1/2 bg-gray-700 flex flex-col justify-center items-center p-4 md:p-8 space-y-4 md:space-y-6 relative overflow-hidden">
+                    {/* New Vibble Logo with Plus and Circles */}
                     <motion.div
-                        className="relative"
-                        animate={{
-                            y: [0, -20, 0],
-                            rotate: [0, 5, -5, 0],
-                        }}
-                        transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                        }}
+                        className="logo flex flex-col items-center"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <GiAstronautHelmet className="text-[#ff6384] text-7xl md:text-9xl drop-shadow-lg" />
-                        <GiRobotGolem className="absolute -top-4 -left-6 md:-left-8 text-[#ffc107] text-4xl md:text-5xl animate-pulse" />
-                        <IoMdPlanet className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 text-[#9c27b0] text-4xl md:text-5xl animate-spin-slow" />
-                    </motion.div>
-
-                    {/* Floating Stars */}
-                    {[...Array(10)].map((_, i) => (
+                        {/* Plus Sign */}
                         <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 bg-white rounded-full"
-                            style={{
-                                top: `${Math.random() * 100}%`,
-                                left: `${Math.random() * 100}%`,
-                            }}
+                            className="text-4xl font-bold mb-2"
                             animate={{
-                                opacity: [0, 1, 0],
-                                scale: [0.5, 1.5, 0.5],
+                                color: ["#ff6f61", "#6b5b95", "#ff6f61"],
                             }}
                             transition={{
-                                duration: Math.random() * 3 + 2,
+                                duration: 3,
                                 repeat: Infinity,
                                 ease: "easeInOut",
                             }}
-                        />
-                    ))}
+                        >
+                            +
+                        </motion.div>
 
-                    <p className="text-lg md:text-xl font-semibold text-gray-700 text-center">
+                        {/* Circle Rows */}
+                        {[0, 1, 2].map((row) => (
+                            <motion.div
+                                key={row}
+                                className="flex gap-4 mb-2"
+                                animate={{
+                                    scale: [1, 1.1, 1],
+                                    opacity: [0.8, 1, 0.8],
+                                }}
+                                transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    delay: row * 0.3,
+                                    ease: "easeInOut",
+                                }}
+                            >
+                                {[0, 1].map((circle) => (
+                                    <motion.div
+                                        key={circle}
+                                        className="w-5 h-5 bg-[#ff6f61] rounded-full"
+                                        animate={{
+                                            y: [0, -15, 0],
+                                            scale: [1, 1.2, 1],
+                                        }}
+                                        transition={{
+                                            duration: 1.2,
+                                            repeat: Infinity,
+                                            delay: circle * 0.1 + row * 0.2,
+                                            ease: "easeInOut",
+                                        }}
+                                    />
+                                ))}
+                            </motion.div>
+                        ))}
+
+                        {/* Vibble Text */}
+                        <motion.div
+                            className="text-4xl font-bold mt-4"
+                            animate={{
+                                color: ["#ff6f61", "#6b5b95", "#ff6f61"],
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            GreetOh!
+                        </motion.div>
+                    </motion.div>
+
+                    <p className="text-sm md:text-xl font-semibold text-gray-300 text-center">
                         Your Secure Space Awaits!
                     </p>
                 </div>
 
                 {/* Right Side - Login Form */}
-                <div className="w-full md:w-1/2 flex flex-col justify-center p-6 md:p-10">
+                <div className="w-full md:w-1/2 flex flex-col justify-center p-4 md:p-10">
                     <Card className="w-full bg-transparent border-none">
                         <CardHeader className="text-center">
-                            <CardTitle className="text-3xl md:text-4xl font-bold text-gray-800">
+                            <CardTitle className="text-2xl md:text-4xl font-bold text-gray-100">
                                 Login
                             </CardTitle>
-                            <CardDescription className="text-gray-500 text-sm md:text-lg">
-                                Welcome back! Nice to see you again!
+                            <CardDescription className="text-gray-400 text-sm md:text-lg">
+                                Pleasure to see you again!
                             </CardDescription>
                         </CardHeader>
                         {!!error && (
-                            <div className="bg-destructive/15 p-3 items-center rounded-md flex gap-x-2 text-sm text-destructive mb-6">
+                            <div className="bg-destructive/15 p-3 items-center rounded-md flex gap-x-2 text-sm text-destructive mb-4 md:mb-6">
                                 <TriangleAlert className="size-5" />
                                 <p>{error}</p>
                             </div>
@@ -128,9 +160,9 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
                                         placeholder="Email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-5 py-3 md:py-4 pl-12 md:pl-14 rounded-lg bg-white text-gray-800 placeholder-gray-400 border border-gray-300 shadow-md focus:ring-2 focus:ring-[#ff6384] text-base md:text-lg"
+                                        className="w-full px-4 md:px-5 py-2 md:py-3 pl-10 md:pl-12 rounded-lg bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 shadow-md focus:ring-2 focus:ring-[#ff6384] text-sm md:text-base"
                                     />
-                                    <FiMail className="absolute left-4 md:left-5 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+                                    <FiMail className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                                 </motion.div>
 
                                 {/* Password Input */}
@@ -146,15 +178,15 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
                                         placeholder="Password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full px-5 py-3 md:py-4 pl-12 md:pl-14 pr-12 md:pr-14 rounded-lg bg-white text-gray-800 placeholder-gray-400 border border-gray-300 shadow-md focus:ring-2 focus:ring-[#ff6384] text-base md:text-lg"
+                                        className="w-full px-4 md:px-5 py-2 md:py-3 pl-10 md:pl-12 pr-10 md:pr-12 rounded-lg bg-gray-700 text-gray-100 placeholder-gray-400 border border-gray-600 shadow-md focus:ring-2 focus:ring-[#ff6384] text-sm md:text-base"
                                     />
-                                    <FiLock className="absolute left-4 md:left-5 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
+                                    <FiLock className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute inset-y-0 right-4 md:right-5 flex items-center text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+                                        className="absolute inset-y-0 right-3 md:right-4 flex items-center text-gray-400 hover:text-gray-300 hover:cursor-pointer"
                                     >
-                                        {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                                        {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                                     </button>
                                 </motion.div>
 
@@ -167,7 +199,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
                                     <Button
                                         type="submit"
                                         disabled={pending}
-                                        className="w-full bg-gradient-to-r from-[#ff6384] to-[#ff4b2b] text-white py-3 md:py-4 text-lg md:text-xl font-semibold rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:cursor-pointer"
+                                        className="w-full bg-gradient-to-r from-[#ff6384] to-[#ff4b2b] text-white py-2 md:py-3 text-sm md:text-lg font-semibold rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 hover:scale-105 hover:cursor-pointer"
                                         size="lg"
                                     >
                                         {pending ? "Signing In..." : "Sign In"}
@@ -177,30 +209,30 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
                             {/* Social Media Login */}
                             <motion.div
-                                className="flex justify-center space-x-4 md:space-x-6 mt-4 md:mt-6"
+                                className="flex justify-center space-x-4 mt-4 md:mt-6"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.8, duration: 0.5 }}
                             >
                                 <FaGoogle
                                     onClick={() => handleProviderSignIn("google")}
-                                    className="text-gray-600 text-3xl md:text-4xl cursor-pointer hover:scale-110 transition-transform"
+                                    className="text-gray-400 text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform hover:text-white"
                                 />
                                 <FaFacebook
                                     onClick={() => handleProviderSignIn("facebook")}
-                                    className="text-blue-600 text-3xl md:text-4xl cursor-pointer hover:scale-110 transition-transform"
+                                    className="text-blue-400 text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform hover:text-blue-300"
                                 />
                                 <FaGithub
                                     onClick={() => handleProviderSignIn("github")}
-                                    className="text-black text-3xl md:text-4xl cursor-pointer hover:scale-110 transition-transform"
+                                    className="text-gray-400 text-2xl md:text-3xl cursor-pointer hover:scale-110 transition-transform hover:text-white"
                                 />
                             </motion.div>
 
-                            <p>
+                            <p className="text-gray-400 text-sm md:text-base">
                                 Don't have an account?{" "}
                                 <span
                                     onClick={() => setState("signUp")}
-                                    className="text-sky-700 hover:underline cursor-pointer font-bold"
+                                    className="text-sky-400 hover:underline cursor-pointer font-bold"
                                 >
                                     Sign Up
                                 </span>

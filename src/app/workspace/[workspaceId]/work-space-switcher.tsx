@@ -50,7 +50,7 @@ export const WorkSpaceSwitcher = () => {
                         className="cursor-pointer capitalize"
                         onClick={() => router.push(`/workspace/${workspace._id}`)}
                     >
-                        <div className="size-6 flex items-center justify-center bg-[#F2F2F2] text-slate-800 font-semibold text-lg rounded-md mr-2">
+                        <div className="size-6 flex items-center justify-center bg-[#6f6e6e] text-slate-800 font-semibold text-lg rounded-md mr-2">
                             {workspace.name.charAt(0).toUpperCase()}
                         </div>
                        <p className="truncate">{workspace.name}</p>

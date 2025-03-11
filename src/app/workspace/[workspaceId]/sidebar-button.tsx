@@ -23,8 +23,8 @@ export const SidebarButton = ({ icon: Icon, label, isActive, onClick }: SidebarB
                 variant="transparent"
                 className={cn(
                     "size-12 p-2 rounded-2xl transition-all cursor-pointer",
-                    "bg-[#FF3B2F] hover:bg-[#FF6F61]",
-                    isActive && "bg-[#FF6F61] shadow-lg"
+                    "bg-[#1e1e2f] hover:bg-[#2a2a40]", // Darker background with hover effect
+                    isActive && "bg-[#ff6384] shadow-lg" // Active state with vibrant pink
                 )}
             >
                 <Icon className={cn(
@@ -35,7 +35,7 @@ export const SidebarButton = ({ icon: Icon, label, isActive, onClick }: SidebarB
             <motion.span
                 className={cn(
                     "text-xs font-semibold transition-all",
-                    isActive ? "text-[#FF3B2F]" : "text-white hover:text-[#FF3B2F]"
+                    isActive ? "text-[#ff6384]" : "text-gray-300 hover:text-[#ff6384]" // Active and hover text color
                 )}
                 whileHover={{ scale: 1.1 }}
             >

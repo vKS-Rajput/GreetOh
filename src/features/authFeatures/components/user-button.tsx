@@ -24,16 +24,16 @@ export const UserButton = () => {
 
     return (
         <DropdownMenu modal={false}>
-            <DropdownMenuTrigger className="outline-none relative">
+            <DropdownMenuTrigger className="outline-none relative cursor-pointer">
                 <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                    className="p-1 rounded-full border border-gray-300 bg-white shadow-sm hover:bg-gray-100 transition"
+                    className="p-1 rounded-full border border-[#ff6384] bg-[#ff6384]/10 shadow-sm hover:bg-[#ff6384]/20 transition"
                 >
                     <Avatar className="size-6">
                         <AvatarImage src={image} alt={name || "User"} />
-                        <AvatarFallback className=" text-gray-700 font-bold text-lg">
+                        <AvatarFallback className="text-[#ff6384] font-bold text-lg">
                             {avatarFallback}
                         </AvatarFallback>
                     </Avatar>
@@ -58,12 +58,12 @@ export const UserButton = () => {
 
                     <div className="border-t my-2" />
 
-                    {/* Logout Button (Styled like other buttons) */}
+                    {/* Logout Button (Styled with a vibrant color) */}
                     <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                        className="flex items-center justify-center p-2 text-red-500 cursor-pointer bg-gray-100 hover:bg-red-100 border border-gray-300 rounded-lg"
+                        className="flex items-center justify-center p-2 text-[#ff4b2b] cursor-pointer bg-[#ff4b2b]/10 hover:bg-[#ff4b2b]/20 border border-[#ff4b2b] rounded-lg"
                         onClick={() => signOut()}
                     >
                         <LogOut className="size-5 mr-2" />

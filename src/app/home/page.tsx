@@ -13,7 +13,7 @@ export default function HomeDashboard() {
 
     if (workspaceLoading || memberLoading) {
         return (
-            <div className="flex flex-col  h-full items-center justify-center">
+            <div className="flex flex-col bg-gray-400  h-full items-center justify-center">
                 <Loader className="size-5 w-full animate-spin text-gray-500" />
             </div>
         );
