@@ -47,10 +47,10 @@ export const ToolBar = () => {
                 >
                     <Button
                         size="sm"
-                        className="bg-gray-700 hover:bg-gray-600 w-full h-9 px-3 rounded-lg border border-gray-600 flex items-center justify-start"
+                        className="bg-gray-700 hover:bg-gray-600 w-full h-9 px-3 rounded-lg border border-gray-600 flex items-center justify-start truncate "
                     >
-                        <Search className="size-5 text-gray-300 mr-2" />
-                        <span className="text-gray-300 text-sm font-semibold">
+                        <Search className="size-5 text-gray-300 mr-2 " />
+                        <span className="text-gray-300 text-sm font-semibold truncate">
                             Search {data?.name}
                         </span>
                     </Button>
