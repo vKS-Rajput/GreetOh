@@ -8,7 +8,7 @@ import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 // Define the card variants using `cva`
 const userItemVariants = cva(
-    "flex flex-col items-center justify-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300",
+    "flex items-center gap-4 p-4 rounded-lg border border-gray-300 dark:border-gray-700 shadow-md hover:shadow-lg transition-transform transform hover:scale-105 duration-300",
     {
         variants: {
             variant: {
@@ -34,18 +34,25 @@ export const UserItem = ({ id, label = "Member", image, variant }: UserItemProps
     const avatarFallback = label.charAt(0).toUpperCase();
 
     return (
-        <Button variant={"transparent"} className={cn(userItemVariants({ variant }))} size={"sm"} asChild>
+        <Button
+            variant={"transparent"}
+            className={cn(userItemVariants({ variant }), "w-auto h-12 flex justify-start items-center")}
+            size={"lg"}
+            asChild
+        >
             <Link href={`/workspace/${workspaceId}/member/${id}`} aria-label={`View ${label}'s profile`}>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4 w-full">
                     {/* Avatar */}
-                    <Avatar className="size-10 rounded-md">
-                        <AvatarImage src={image} alt={label} />
-                        <AvatarFallback className="bg-blue-500 dark:bg-gray-600 text-gray-700 dark:text-gray-200">
+                    <Avatar className="size-12 rounded-full shadow-md">
+                        <AvatarImage src={image} alt={label} className="object-cover" />
+                        <AvatarFallback className="bg-blue-500 text-white font-semibold text-lg">
                             {avatarFallback}
                         </AvatarFallback>
                     </Avatar>
                     {/* Label */}
-                    <span className="text-sm font-medium truncate">{label}</span>
+                    <span className="text-lg font-semibold truncate text-gray-900 dark:text-white">
+                        {label}
+                    </span>
                 </div>
             </Link>
         </Button>

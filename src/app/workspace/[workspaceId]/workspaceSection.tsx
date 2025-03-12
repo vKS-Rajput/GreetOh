@@ -36,7 +36,7 @@ export const WorkspaceSection = ({ children, label, hint, count, onNew }: Worksp
                     <Button
                         variant="transparent"
                         size="sm"
-                        className="px-2 text-sm text-muted-foreground text-white hover:text-foreground truncate"
+                        className="px-2 text-sm text-muted-foreground hover:text-foreground truncate"
                         aria-label={label}
                     >
                         {label}

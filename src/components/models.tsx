@@ -1,6 +1,7 @@
 "use client"
 import { CreateWorkspaceModel } from "@/features/workspace/components/create-workspace-model"
 import { useEffect, useState } from "react";
+import { CreateChannelModel } from "@/features/channels/componants/create-channel-model";
 
 export const Models = () => {
     const [mounted, setMounted] = useState(false);
@@ -15,6 +16,7 @@ export const Models = () => {
     return (
         <>
             <CreateWorkspaceModel />
+            <CreateChannelModel />
         </>
     );
 };
